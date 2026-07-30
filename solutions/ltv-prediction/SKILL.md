@@ -32,7 +32,6 @@ Parse the action from `$ARGUMENTS`:
 ## Install
 
 1. Locate the sf-rcg-solutions repository:
-   - Check `~/project/sf-sc/sf-rcg-solutions/`
    - Check current working directory
    - If not found: `git clone https://github.com/Snowflake-Labs/sf-rcg-solutions.git /tmp/sf-rcg-solutions`
 
