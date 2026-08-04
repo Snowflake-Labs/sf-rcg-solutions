@@ -1,0 +1,24 @@
+{
+  "name": "franchise-operations-intelligence",
+  "display_name": "Franchise Multi-Unit Operations Intelligence",
+  "version": "1.0.0",
+  "industry": "Retail, CPG & General",
+  "description": "Guided analytics workflows, governed metric definitions, schema remediation scripts, and a Cortex Agent for franchise multi-unit owners managing unit performance, benchmarking, labor, COGS/waste, compliance, and expansion across a QSR Brands network.",
+  "source": "",
+  "database": "SF_SOLUTIONS",
+  "schemas": ["OPS"],
+  "role": "ACCOUNTADMIN",
+  "requires_warehouse": true,
+  "requires_spcs": false,
+  "install_scripts": ["scripts/setup.sql"],
+  "teardown_scripts": ["scripts/teardown.sql"],
+  "features": [
+    "Semantic View",
+    "Dynamic Tables",
+    "Data Metric Functions",
+    "Cortex Agent",
+    "Serverless Alerts",
+    "Resource Monitor"
+  ],
+  "notes": "Before resuming alerts: create notification integration FRANCHISE_OPS_NOTIFY and replace ops-alerts@franchise.example in setup.sql. The LABOR_WEEKLY remediation block uses session variables — execute as a single batch."
+}
