@@ -1,49 +1,108 @@
 # Contributing to sf-rcg-solutions
 
-Thank you for contributing to Snowflake Retail & Consumer Goods Solutions!
+Thank you for contributing to Snowflake Retail, CPG & General Solutions!
 
-## Repository Structure
+> **Note:** Only Snowflake employees may contribute to this repository. External contributions are not accepted.
+
+## Solution Types
+
+This repository supports two types of solutions:
+
+### Script Type
+
+Solutions that install Snowflake objects (databases, schemas, tables, models, agents) via SQL scripts and optionally include Python components (Streamlit apps, stored procedures, UDFs).
 
 ```
-sf-rcg-solutions/
-├── solutions/
-│   └── <solution-name>/      # Solution assets (SQL, Streamlit, prompts)
-│       ├── manifest.json
-│       ├── README.md
-│       ├── NEXT_ACTIONS.md
-│       ├── scripts/setup.sql
-│       ├── scripts/teardown.sql
-│       └── streamlit/        # Optional dashboard
-└── README.md
+solutions/<solution-name>/
+├── manifest.json          # Solution metadata (type: "script")
+├── README.md              # Architecture overview, quick start
+├── NEXT_ACTIONS.md        # Post-install guidance
+├── scripts/
+│   ├── setup.sql          # Installation script
+│   ├── teardown.sql       # Cleanup script
+│   └── data.sql           # Demo data (optional, for large datasets)
+└── streamlit/             # Optional dashboard
+    ├── streamlit_app.py
+    └── environment.yml
+```
+
+### Plugin Type (CoCo plugin)
+
+Solutions that install a Cortex Code plugin with skills, agents, and optionally Snowflake objects.
+
+```
+solutions/<solution-name>/
+├── manifest.json          # Solution metadata (type: "plugin")
+├── README.md              # Overview, usage
+├── plugins/cortex-code/   # CoCo plugin directory
+│   ├── .cortex-plugin/
+│   │   └── plugin.json
+│   └── skills/
+│       └── ...
+└── scripts/               # Optional SQL scripts
 ```
 
 ## Adding a New Solution
 
-Create files in `solutions/<solution-name>/`:
+### Script Type — Required Files
 
-Required files:
-- `manifest.json` — solution metadata (name, industry, database, schemas, features)
-- `README.md` — architecture overview, quick start, example usage
-- `NEXT_ACTIONS.md` — post-install guidance
-- `scripts/setup.sql` — full installation script (idempotent, uses CREATE OR REPLACE)
-- `scripts/teardown.sql` — cleanup script (drops all created objects)
+| File | Purpose |
+|------|---------|
+| `manifest.json` | Machine-readable metadata: name, version, type, industry, database, schemas, features, script paths |
+| `README.md` | Architecture overview, quick start, and example usage |
+| `NEXT_ACTIONS.md` | Post-install guidance — answers "what should I do next?" |
+| `scripts/setup.sql` | Installation script (idempotent, uses CREATE OR REPLACE) |
+| `scripts/teardown.sql` | Cleanup script (drops all created objects) |
 
 Optional:
-- `scripts/deploy_streamlit.sql` — Streamlit deployment (separate from setup)
 - `streamlit/` — Streamlit dashboard files
+- `scripts/data.sql` — Demo data INSERT statements (when data exceeds ~200 lines)
 
-## Naming Conventions
+### Plugin Type — Required Files
 
-- Solution directory: `kebab-case` (e.g., `ltv-prediction`)
+| File | Purpose |
+|------|---------|
+| `manifest.json` | Machine-readable metadata with `"type": "plugin"` and `"plugin_path"` |
+| `README.md` | Overview, usage instructions, skill invocation examples |
+| `plugins/cortex-code/` | CoCo plugin directory (skills, agents, hooks, etc.) |
+
+## NEXT_ACTIONS.md Guidelines (Script Type Only)
+
+This file is read when the user asks "what next?" after installing. Structure it as progressive phases:
+
+1. **Quick Exploration** — immediate things to try (open dashboard, run queries)
+2. **Customize with Your Data** — how to replace demo data
+3. **Tune the Model** — adjust parameters, add features
+4. **Production Deployment** — scheduling, monitoring, RBAC
+
+## Snowsight URL Format (Script Type)
+
+Always use this format for Snowsight URLs:
+
+```
+https://app.snowflake.com/<org>/<account>/#/streamlit-apps/<DB>.<SCHEMA>.<STREAMLIT_NAME>
+```
+
+SQL to generate:
+
+```sql
+SELECT 'https://app.snowflake.com/' || LOWER(CURRENT_ORGANIZATION_NAME()) || '/' || LOWER(CURRENT_ACCOUNT_NAME())
+    || '/#/streamlit-apps/<DB>.<SCHEMA>.<NAME>' AS STREAMLIT_URL;
+```
+
+## Naming Conventions (Script Type)
+
+- Solution directory: `kebab-case` (e.g., `clinical-quality-agent`)
 - Database: `SF_SOLUTIONS` (shared across all solutions)
-- Schemas: `UPPER_SNAKE_CASE` (e.g., `LTV_RAW`, `LTV_ANALYTICS`, `LTV_ML`)
-- Streamlit apps: `UPPER_SNAKE_CASE` (e.g., `LTV_PREDICTION_DASHBOARD`)
+- Schemas: `UPPER_SNAKE_CASE` (e.g., `CLINICAL_QUALITY_SAFETY`)
+- Streamlit apps: `UPPER_SNAKE_CASE` (e.g., `CLINICAL_QUALITY_DASHBOARD`)
 
-## Testing
+## Testing (Script Type)
 
 Before submitting a PR:
-1. Run `setup.sql` end-to-end on a clean account
+
+1. Run `setup.sql` end-to-end on a clean account (script type)
 2. Verify all objects are created (check INFORMATION_SCHEMA)
 3. Open the Streamlit dashboard URL and confirm it loads without errors
 4. Run `teardown.sql` and verify everything is removed
-5. Run linters: `uv run ruff check .`, `uv run ruff format --check .`, `uv run sqruff lint .`
+5. Test skill execution: `$sf-solutions:<solution-name>`

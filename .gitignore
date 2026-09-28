@@ -58,12 +58,12 @@ logs/
 
 # Snowflake
 snowflake_jwt_*.json
+.snowflake
+.cortex
 
 # Local files
 local.README.md
 
-.snowflake
-.cortex
-
+# Linter cache
 .ruff_cache
 work

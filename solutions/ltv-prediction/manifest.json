@@ -1,6 +1,7 @@
 {
   "name": "ltv-prediction",
   "display_name": "Customer Lifetime Value Prediction",
+  "type": "script",
   "version": "2.0.0",
   "industry": "Retail / CPG",
   "source": "",

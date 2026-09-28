@@ -1,0 +1,17 @@
+{
+  "name": "franchise-operations-intelligence",
+  "version": "1.0.0",
+  "description": "Guided analytics workflows, governed metric definitions, schema remediation scripts, and a Cortex Agent for franchise multi-unit owners managing unit performance, benchmarking, labor, COGS/waste, compliance, and expansion across a QSR Brands network.",
+  "authors": ["Snowflake"],
+  "skills": [
+    "skills/primary-workflow",
+    "skills/kpi-definitions",
+    "skills/domain-glossary",
+    "skills/unit-performance-monitoring",
+    "skills/network-benchmarking",
+    "skills/labor-optimization",
+    "skills/cogs-waste-control",
+    "skills/compliance-tracking",
+    "skills/expansion-evaluation"
+  ]
+}
