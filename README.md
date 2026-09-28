@@ -19,18 +19,13 @@ End-to-end solution accelerators for the Retail & Consumer Goods industry vertic
 
 ## Quick Install (via Cortex Code)
 
-Solutions are installed via the `$sf-solutions` skill in [snowflake-ai-kit](https://github.com/Snowflake-Labs/snowflake-ai-kit):
-
-```bash
-# Install the snowflake-ai-kit plugin (includes sf-solutions skill)
-cortex skill add github:Snowflake-Labs/snowflake-ai-kit
-```
-
-Then in a Cortex Code session, run a solution by name:
+> **TBA** — Plugin install command will be available after public release.
 
 ```
-$sf-solutions:ltv-prediction
-$sf-solutions:ltv-prediction teardown
+$sf-solutions                              # List all available solutions
+$sf-solutions rcg                          # Filter by RCG industry
+$sf-solutions:<solution-name>              # Install a solution
+$sf-solutions:<solution-name> teardown     # Remove a solution
 ```
 
 ---
