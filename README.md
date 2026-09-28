@@ -1,5 +1,7 @@
 # Snowflake Retail & Consumer Goods Solutions
 
+Disclaimer: This application is not part of the Snowflake Service and is governed by the terms in LICENSE, unless expressly agreed to in writing. You use this application at your own risk, and Snowflake has no obligation to support your use of this application. [Learn more](./LEGAL.md)
+
 **RCG: Retail & Consumer Goods**
 
 End-to-end solution accelerators for the Retail & Consumer Goods industry vertical, built on Snowflake and Cortex Code, showcasing Cortex AI, Snowflake ML, and the modern data platform.
@@ -11,6 +13,7 @@ End-to-end solution accelerators for the Retail & Consumer Goods industry vertic
 | # | Solution | Industry | Directory | Key Snowflake Features | Status |
 |---|----------|----------|-----------|----------------------|--------|
 | 1 | **Customer Lifetime Value Prediction** | Retail / CPG | `solutions/ltv-prediction/` | Snowflake ML Forecast, Cortex AI Functions (COMPLETE), Customer Segmentation, Feature Engineering | ✅ Done |
+| 2 | **Franchise Multi-Unit Operations Intelligence** | Retail, CPG & General | `solutions/franchise-operations-intelligence/` | Semantic View, Dynamic Tables, Data Metric Functions, Cortex Agent, Serverless Alerts | ✅ Done |
 
 ---
 
@@ -34,15 +37,33 @@ $sf-solutions:ltv-prediction teardown
 
 ## Getting Started
 
-Each solution is self-contained in its own directory with:
+Each solution is self-contained in its own directory. There are two types:
+
+### Script Type
 
 ```
 solutions/<solution-name>/
+├── manifest.json      # Solution metadata (type: "script")
 ├── README.md          # Overview, architecture, prerequisites
-├── manifest.json      # Solution metadata for the installer
+├── NEXT_ACTIONS.md    # Post-install verification steps and example queries
 ├── scripts/           # SQL setup and teardown scripts
-├── NEXT_ACTIONS.md    # Post-install guidance
-└── streamlit/         # Optional dashboard
+└── streamlit/         # Streamlit app (if applicable)
+```
+
+### Plugin Type
+
+Solutions that install a Cortex Code plugin with skills, agents, and optionally Snowflake objects.
+
+```
+solutions/<solution-name>/
+├── manifest.json          # Solution metadata (type: "plugin")
+├── README.md              # Overview, usage
+├── plugins/cortex-code/   # CoCo plugin directory
+│   ├── .cortex-plugin/
+│   │   └── plugin.json
+│   └── skills/
+│       └── ...
+└── scripts/               # Optional SQL scripts
 ```
 
 ## Prerequisites

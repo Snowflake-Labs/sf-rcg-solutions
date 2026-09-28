@@ -1,6 +1,8 @@
 {
   "name": "franchise-operations-intelligence",
   "display_name": "Franchise Multi-Unit Operations Intelligence",
+  "type": "plugin",
+  "plugin_path": "plugins/cortex-code",
   "version": "1.0.0",
   "industry": "Retail, CPG & General",
   "description": "Guided analytics workflows, governed metric definitions, schema remediation scripts, and a Cortex Agent for franchise multi-unit owners managing unit performance, benchmarking, labor, COGS/waste, compliance, and expansion across a QSR Brands network.",
