@@ -13,7 +13,6 @@ End-to-end solution accelerators for the Retail & Consumer Goods industry vertic
 | # | Solution | Industry | Directory | Key Snowflake Features | Status |
 |---|----------|----------|-----------|----------------------|--------|
 | 1 | **Customer Lifetime Value Prediction** | Retail / CPG | `solutions/ltv-prediction/` | Snowflake ML Forecast, Cortex AI Functions (COMPLETE), Customer Segmentation, Feature Engineering | ✅ Done |
-| 2 | **Franchise Multi-Unit Operations Intelligence** | Retail, CPG & General | `solutions/franchise-operations-intelligence/` | Semantic View, Dynamic Tables, Data Metric Functions, Cortex Agent, Serverless Alerts | ✅ Done |
 
 ---
 
